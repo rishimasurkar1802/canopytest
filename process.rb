@@ -11,7 +11,7 @@ module Github
       @client = client
     end
 
-    def issues(open: true)
+    def issues(open: true, page_no: 1, per_page: 3)
       # This method returns a list of issues from the Github API.
       # It accepts an optional argument called `open` that defaults to true.
       # If `open` is true, it returns only open issues.
@@ -26,8 +26,8 @@ module Github
       
       # Testing with default pages - WORKS
       # @TODO write test cases
-      page_no = 2
-      per_page = 4
+      # page_no = page_no ? page_no : 2
+      # per_page = per_page ? per_page : 4
 
       response = @client.get("/issues?state=#{state}&page=#{page_no}&per_page#{per_page}")
       issues = JSON.parse(response.body)
@@ -62,4 +62,4 @@ module Github
 end
 # The URL to make API requests for the IBM organization and the jobs repository
 # would be 'https://api.github.com/repos/ibm/jobs'.
-Github::Processor.new(Github::Client.new(ENV['TOKEN'], ARGV[0])).issues(open: false)
+Github::Processor.new(Github::Client.new(ENV['TOKEN'], ARGV[0])).issues(open: false, page_no: 2, per_page: 4)
