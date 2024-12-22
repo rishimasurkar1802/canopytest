@@ -26,8 +26,8 @@ module Github
       
       # Testing with default pages - WORKS
       # @TODO write test cases
-      page_no = 1
-      per_page = 3
+      page_no = 2
+      per_page = 4
 
       response = @client.get("/issues?state=#{state}&page=#{page_no}&per_page#{per_page}")
       issues = JSON.parse(response.body)
